@@ -12,7 +12,7 @@ function msgServer() {
     var msgQue = new msgQueue();
     let wsPool = new Dic();
     let que = new queue();
-    
+
     this.init = function () {
         msgQue.init(this);
         que.create();
@@ -43,7 +43,6 @@ function msgServer() {
     this.checkWebsocket = function (msg) {
         //有漏洞如果别人冒用的话会有问题
         let data = JSON.parse(msg);
-
         if (wsPool.get(data.keys) === undefined) {
             console.log("data.keys ====> underfind")
             return false;
@@ -62,8 +61,6 @@ function msgServer() {
     };
 
     this.Privatedata = function (key, data) {
-
-
         let ws = wsPool.get(key);
         ws.send(JSON.stringify(data));
     };
@@ -73,7 +70,6 @@ function msgServer() {
      */
     this.delectWs = function (ws) {
         console.log("close the ws")
-
         if (ws.readyState != 3) {
             ws.close()
         } else {
@@ -89,7 +85,6 @@ function msgServer() {
         wsPool.get(key) == undefined ?
             console.log("can't close the ws") :
             this.delectWs(wsPool.get(key));
-
     }
 
     this.getMsgQue = function () { //利用闭包
@@ -97,7 +92,6 @@ function msgServer() {
     }
 
     this.getKeys = function (ws) {
-
         return wsPool.getKeys(ws)
     };
 }

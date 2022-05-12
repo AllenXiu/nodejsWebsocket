@@ -34,7 +34,6 @@ function dataManager(msgServer,gamserver){
     this.dealWithData = function(){  
         let data = this.msgSer.getMsgQue().front(); //从队列中取到数据包后，
         this.msgSer.getMsgQue().dequeue(); 
-        
         if (this.gamser.dataGamedeal(data, dataQue) == true ) {
             this.sendDatainData();
         } else {
